@@ -1,12 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
-import {useEffect, useState} from "react";
+import Main from './pages/Main';
+import { useEffect, useState } from 'react';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+const theme = createTheme({
+    palette: {
+        primary: {
+            main: '#4747C9'
+        },
+        secondary: {
+            main: '#50B7A7'
+        }
+    }
+});
 function App() {
     const [message, setMessage] = useState([]);
 
     useEffect(() => {
-        fetch("/hello")
+        fetch('/hello')
             .then((response) => {
                 return response.json();
             })
@@ -16,25 +26,14 @@ function App() {
     }, []);
 
     return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo"/>
-                <p>
-                    Edit <code>src/App.js</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
-                <ul>
-                    {message.map((text, index) => <li key={`${index}-${text}`}>{text}</li>)}
-                </ul>
-            </header>
-        </div>
+        <ThemeProvider theme={theme}>
+            <Main />
+            <ul>
+                {message.map((text, index) => (
+                    <li key={`${index}-${text}`}>{text}</li>
+                ))}
+            </ul>
+        </ThemeProvider>
     );
 }
 

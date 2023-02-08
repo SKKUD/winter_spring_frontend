@@ -1,3 +1,4 @@
+import React from 'react';
 import Main from './pages/Main';
 import { useEffect, useState } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';

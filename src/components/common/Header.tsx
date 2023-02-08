@@ -21,17 +21,17 @@ const pages = [
 ];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-function Header() {
-    const [anchorElNav, setAnchorElNav] = React.useState(null);
-    const [anchorElUser, setAnchorElUser] = React.useState(null);
+export default function Header() {
+    const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
+    const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
     const navigate = useNavigate();
     const navigatePages = (params) => {
         navigate(`${params}`);
     };
-    const handleOpenNavMenu = (event) => {
+    const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
     };
-    const handleOpenUserMenu = (event) => {
+    const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElUser(event.currentTarget);
     };
 
@@ -44,7 +44,7 @@ function Header() {
     };
 
     return (
-        <AppBar position="static" sx={{ backgroundColor: 'white' }}>
+        <AppBar position="static">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <Typography
@@ -57,26 +57,22 @@ function Header() {
                             display: { xs: 'none', md: 'flex' },
                             fontFamily: 'monospace',
                             fontWeight: 700,
-
                             letterSpacing: '.3rem',
+                            color: 'inherit',
                             textDecoration: 'none'
                         }}
                     >
-                        winter springㅁㅁ
+                        winter spring
                     </Typography>
 
-                    <Box
-                        sx={{
-                            flexGrow: 1,
-                            display: { xs: 'flex', md: 'none' }
-                        }}
-                    >
+                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
                             size="large"
                             aria-label="account of current user"
                             aria-controls="menu-appbar"
                             aria-haspopup="true"
                             onClick={handleOpenNavMenu}
+                            color="inherit"
                         >
                             <MenuIcon />
                         </IconButton>
@@ -99,8 +95,8 @@ function Header() {
                             }}
                         >
                             {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page}</Typography>
+                                <MenuItem key={page[1]} onClick={handleCloseNavMenu}>
+                                    <Typography textAlign="center">{page[1]}</Typography>
                                 </MenuItem>
                             ))}
                         </Menu>
@@ -118,7 +114,7 @@ function Header() {
                             fontFamily: 'monospace',
                             fontWeight: 700,
                             letterSpacing: '.3rem',
-
+                            color: 'inherit',
                             textDecoration: 'none'
                         }}
                     >
@@ -138,7 +134,7 @@ function Header() {
                                 onClick={(e) => {
                                     navigatePages(page[1]);
                                 }}
-                                sx={{ my: 2, display: 'block' }}
+                                sx={{ my: 2, color: 'white', display: 'block' }}
                             >
                                 {page[0]}
                             </Button>
@@ -179,4 +175,3 @@ function Header() {
         </AppBar>
     );
 }
-export default Header;
